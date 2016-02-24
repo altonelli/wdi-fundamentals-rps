@@ -25,14 +25,14 @@ function getPlayerMove(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `getInput()`.
-    return move || getInput()};
+    return move || getInput();
 }
 
 function getComputerMove(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
-    return move || randomPlay()};
+    return move || randomPlay();
 }
 
 function getWinner(playerMove,computerMove) {
@@ -41,6 +41,21 @@ function getWinner(playerMove,computerMove) {
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
     /* YOUR CODE HERE */
+    switch (true) {
+      case (playerMove == "rock" && computerMove == "scissors")
+        || (playerMove == "scissors" && computerMove == "paper")
+        || (playerMove == "paper" && computerMove == "rock"):
+        winner = 'player';
+        break;
+      case (playerMove == "scissors" && computerMove == "rock")
+        || (playerMove == "paper" && computerMove == "scissors")
+        || (playerMove == "rock" && computerMove == "paper"):
+        winner = 'computer';
+        break;
+      default:
+        winner = 'tie'
+        break;
+    };
     return winner;
 }
 
@@ -50,5 +65,25 @@ function playToFive() {
     var computerWins = 0;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
     /* YOUR CODE HERE */
+    while (playerWins < 5 || computerWins < 5) {
+      var playerMove = getInput()
+      var computerMove = randomPlay()
+      var winner = getWinner(playerMove,computerMove)
+      switch (true) {
+        case winner == 'player':
+          console.log('Player won!')
+          playerWins += 1;
+          break;
+        case winner == 'computer':
+          console.log('Computer won!')
+          computerWins += 1;
+          break;
+        default:
+          console.log('The game was a tie.')
+          break;
+      };
+      console.log('Player chose ' + playerMove + ' while Computer chose ' + computerMove);
+      console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
+    };
     return [playerWins, computerWins];
 }
